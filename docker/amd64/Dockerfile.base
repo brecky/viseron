@@ -1,7 +1,5 @@
 ARG UBUNTU_VERSION
-ARG HAILO_VERSION
 FROM brecky/viseron-models:latest as models
-FROM brecky/amd64-hailo:${HAILO_VERSION} as hailo
 FROM ubuntu:${UBUNTU_VERSION} as base
 
 COPY --from=models /detectors/models/darknet /detectors/models/darknet
@@ -55,7 +53,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   echo "deb https://apt.repos.intel.com/openvino/${OPENVINO_YEAR} ubuntu${UBUNTU_YEAR} main" | tee /etc/apt/sources.list.d/intel-openvino-${OPENVINO_YEAR}.list && \
   wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB && \
   apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB  && \
-  apt-get update && apt-get install -y --no-install-recommends openvino-${OPENVINO_VERSION} && \
+  apt-get update && apt-get install -y --no-install-recommends openvino-2024.4.0 && \
   # OpenCL
   mkdir /opencl &&\
   cd /opencl && \
@@ -71,7 +69,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ln -s /detectors/models/darknet/yolov7.weights /detectors/models/darknet/default.weights && \
   ln -s /detectors/models/darknet/yolov7.cfg /detectors/models/darknet/default.cfg
 
-ARG HAILO_VERSION
-COPY --from=hailo /usr/local/bin/hailortcli /usr/local/bin/hailortcli
-COPY --from=hailo /usr/local/lib/libhailort.so.${HAILO_VERSION} /usr/local/lib/libhailort.so.${HAILO_VERSION}
-COPY --from=hailo /wheels /wheels/
+#ARG HAILO_VERSION
+#COPY --from=hailo /usr/local/bin/hailortcli /usr/local/bin/hailortcli
+#COPY --from=hailo /usr/local/lib/libhailort.so.${HAILO_VERSION} /usr/local/lib/libhailort.so.${HAILO_VERSION}
+#COPY --from=hailo /wheels /wheels/
