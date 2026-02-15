@@ -2,7 +2,7 @@ ARG UBUNTU_VERSION
 ARG ARCH
 ARG DLIB_VERSION
 ARG BUILD_FROM
-FROM roflcoopter/${ARCH}-dlib:${DLIB_VERSION} as dlib
+FROM brecky/${ARCH}-dlib:${DLIB_VERSION} as dlib
 FROM ${BUILD_FROM} as build
 
 COPY --from=dlib /wheels /wheels
@@ -24,7 +24,8 @@ RUN \
   esac \
   fi
 
-RUN apt-get -yqq update && apt-get install -yq --no-install-recommends \
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y \
   software-properties-common \
   gnupg \
   cmake \
@@ -39,7 +40,7 @@ RUN apt-get -yqq update && apt-get install -yq --no-install-recommends \
   # Install Python 3.9 if it doesn't exist
   && if [ ! -f /usr/local/bin/python3.9 ]; then \
   add-apt-repository ppa:deadsnakes/ppa -y && \
-  apt-get update && apt-get install -y --no-install-recommends \
+  apt-get update && apt-get install --no-install-recommends -y \
   python3.9 \
   python3.9-distutils ; \
   fi \

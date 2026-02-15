@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION
 ARG UBUNTU_VERSION
 ARG JETPACK_VERSION
-FROM roflcoopter/jetson-nano-python:${PYTHON_VERSION} as python
+FROM brecky/jetson-nano-python:${PYTHON_VERSION} as python
 FROM balenalib/jetson-nano-ubuntu:${UBUNTU_VERSION}-build as qemu
 FROM nvcr.io/nvidia/l4t-base:r${JETPACK_VERSION} as build
 

@@ -1,6 +1,6 @@
 ARG CMAKE_VERSION
 ARG UBUNTU_VERSION
-FROM roflcoopter/rpi3-cmake:${CMAKE_VERSION} as cmake
+FROM brecky/rpi3-cmake:${CMAKE_VERSION} as cmake
 FROM balenalib/raspberrypi3-ubuntu:${UBUNTU_VERSION}-build as build
 RUN [ "cross-build-start" ]
 

@@ -1,8 +1,8 @@
 ARG CMAKE_VERSION
 ARG FFMPEG_VERSION
 ARG UBUNTU_VERSION
-FROM roflcoopter/rpi3-cmake:${CMAKE_VERSION} as cmake
-FROM roflcoopter/rpi3-ffmpeg:${FFMPEG_VERSION} as ffmpeg
+FROM brecky/rpi3-cmake:${CMAKE_VERSION} as cmake
+FROM brecky/rpi3-ffmpeg:${FFMPEG_VERSION} as ffmpeg
 FROM balenalib/raspberrypi3-ubuntu:${UBUNTU_VERSION}-build as build
 RUN [ "cross-build-start" ]
 

@@ -1,6 +1,6 @@
 ARG UBUNTU_VERSION
 ARG FFMPEG_VERSION
-FROM roflcoopter/amd64-ffmpeg:${FFMPEG_VERSION} as ffmpeg
+FROM brecky/amd64-ffmpeg:${FFMPEG_VERSION} as ffmpeg
 FROM ubuntu:${UBUNTU_VERSION} AS build
 
 COPY --from=ffmpeg /usr/local /usr/local/
