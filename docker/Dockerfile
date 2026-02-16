@@ -83,7 +83,8 @@ ENV \
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_OVERLAY_ARCH}-installer /tmp/s6-overlay-installer
 
 RUN \
-  apt-get update && apt-get install -y --no-install-recommends \
+  apt-get update \
+  && apt-get install -y --no-install-recommends \
   software-properties-common \
   curl \
   cpulimit \
@@ -93,17 +94,18 @@ RUN \
   python3-pip \
   usbutils \
   # OpenCV and FFmpeg Dependencies
-  libgomp1 \
+  libgomp12 \
   # dlib Dependencies
   libopenblas-base \
   # PostgreSQL
   postgresql \
   postgresql-contrib \
-  # NGNX \
+  #NGNX 
   nginx \
   # Install extra apt packages from build-arg
   ${EXTRA_APT_PACKAGES} \
   # GStreamer
+  libgstreamer1.0-0\
   libgstreamer1.0-dev \
   libgstreamer-plugins-base1.0-dev \
   libgstreamer-plugins-bad1.0-dev \
@@ -118,15 +120,15 @@ RUN \
   gstreamer1.0-gl \
   gstreamer1.0-pulseaudio \
   python3-gst-1.0 \
-  && rm -rf /var/lib/apt/lists/* \
-  \
-  && python3 -m pip install --upgrade pip \
-  && python3 -m pip install /wheels/*.whl \
+  && rm -rf /var/lib/apt/lists/* 
+  
+  RUN python3 -m pip install --upgrade pip \
+  RUN python3 -m pip install /wheels/*.whl \
   && rm -r /wheels \
   \
   # Install Python 3.9 if it doesn't exist
   && if [ ! -f /usr/local/bin/python3.9 ]; then \
-  add-apt-repository ppa:deadsnakes/ppa -y && \
+   add-apt-repository ppa:deadsnakes/ppa -y && \
   apt-get update && apt-get install -y --no-install-recommends \
   python3.9 \
   python3.9-distutils \
@@ -154,18 +156,18 @@ RUN \
 
 ENTRYPOINT ["/init"]
 
-COPY docker/ffprobe_wrapper /home/abc/bin/ffprobe
-COPY docker/ffmpeg_wrapper /home/abc/bin/ffmpeg
-COPY --from=opencv /opt/opencv /usr/local/
-COPY --from=ffmpeg /usr/local /ffmpeg/
-COPY --from=gpac /gpac/bin/gcc /usr/bin
-COPY --from=go2rtc /usr/local/bin/go2rtc /usr/local/bin/go2rtc
-COPY rootfs/ /
-COPY --from=frontend /frontend/dist /src/viseron/frontend/
-COPY manager.py /src/manager.py
-COPY viseron /src/viseron/
+#COPY docker/ffprobe_wrapper /home/abc/bin/ffprobe
+#COPY docker/ffmpeg_wrapper /home/abc/bin/ffmpeg
+#COPY --from=opencv /opt/opencv /usr/local/
+#COPY --from=ffmpeg /usr/local /ffmpeg/
+#COPY --from=gpac /gpac/bin/gcc /usr/bin
+#COPY --from=go2rtc /usr/local/bin/go2rtc /usr/local/bin/go2rtc
+#COPY rootfs/ /
+#COPY --from=frontend /frontend/dist /src/viseron/frontend/
+#COPY manager.py /src/manager.py
+#COPY viseron /src/viseron/
 
-ARG VISERON_VERSION="dev"
-ARG VISERON_GIT_COMMIT="unknown"
-ENV VISERON_VERSION=${VISERON_VERSION}
-ENV VISERON_GIT_COMMIT=${VISERON_GIT_COMMIT}
+#ARG VISERON_VERSION="dev"
+#ARG VISERON_GIT_COMMIT="unknown"
+#ENV VISERON_VERSION=${VISERON_VERSION}
+#ENV VISERON_GIT_COMMIT=${VISERON_GIT_COMMIT}

@@ -36,17 +36,18 @@ RUN apt-get update \
   python3-setuptools \
   python3-wheel \
   libgirepository1.0-dev\
-  libcairo2-dev \
+  libcairo2-dev 
   # Install Python 3.9 if it doesn't exist
-  && if [ ! -f /usr/local/bin/python3.9 ]; then \
+  RUN if [ ! -f /usr/local/bin/python3.9 ]; then \
   add-apt-repository ppa:deadsnakes/ppa -y && \
   apt-get update && apt-get install --no-install-recommends -y \
   python3.9 \
   python3.9-distutils ; \
-  fi \
-  && python3 -m pip install --upgrade pip \
-  && python3.9 -m pip install --upgrade pip \
-  && apt-get autoremove -y && apt-get clean -y
+  fi 
+ 
+  RUN python3 -m pip install --upgrade pip 
+  RUN python3.9 -m pip install --upgrade pip 
+  RUN apt-get autoremove -y && apt-get clean -y
 
 # Pip does not find our OpenCV built from source so we fake it here
 ARG OPENCV_VERSION
