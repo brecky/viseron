@@ -37,7 +37,7 @@ stages:
       displayName: Build in Compose
       inputs:
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-        projectName: 'brecky/$(Build.BuildId)'
+        projectName: '(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
         arguments: 'amd64-ffmpeg'
@@ -47,7 +47,7 @@ stages:
       displayName: Login and push to Docker Hub
       inputs:
         containerRegistry: 'Docker Hub Service'
-        repository: 'brecky/$(Build.BuildId)'
+        repository: '$(Build.BuildId)'
         command: 'push'
         tags: |
           $(buildTag)
