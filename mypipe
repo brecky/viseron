@@ -34,17 +34,17 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: DockerCompose@1
+      displayName: Build in Compose
       inputs:
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-        projectName: '$(imageRepository)'#'$(Build.BuildId)'
+        projectName: '$(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
-        
-        
     - task: Docker@2
+      displayName: Login and push to Docker Hub
       inputs:
         containerRegistry: 'Docker Hub Service'
         repository: 'brecky/$(Build.BuildId)'
@@ -54,6 +54,7 @@ stages:
           $(latestTag)
     
     - task: Docker@2
+      displayName: Logout from Docker Hub
       inputs:
         containerRegistry: 'Docker Hub Service'
         command: 'logout'
