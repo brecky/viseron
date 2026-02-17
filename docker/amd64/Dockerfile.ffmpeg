@@ -1,10 +1,13 @@
 # Shameless copy of https://github.com/jrottenberg/ffmpeg/
-ARG UBUNTU_VERSION
+ARG UBUNTU_VERSION="noble"
+ARG MAKEFLAGS="-j2"
+ARG OPENCOREAMR_VERSION="0.1.6"
+
 FROM ubuntu:${UBUNTU_VERSION} AS build
 
 WORKDIR /tmp/workdir
 
-ARG MAKEFLAGS="-j2"
+
 
 ENV \
   DEBIAN_FRONTEND=noninteractive \
@@ -42,7 +45,7 @@ RUN buildDeps="autoconf \
   apt-get install -yq --no-install-recommends ${buildDeps}
 
 ### opencore-amr https://sourceforge.net/projects/opencore-amr/
-ARG OPENCOREAMR_VERSION
+
 RUN \
   DIR=/tmp/opencore-amr && \
   mkdir -p ${DIR} && \
@@ -403,11 +406,11 @@ RUN \
   make install && \
   rm -rf ${DIR}
 ### ffmpeg https://ffmpeg.org/
-ARG FFMPEG_VERSION
+ARG FFMPEG_VERSION: "5.1.8"
 RUN  \
   DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
-  curl -sLO https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 && \
-  tar -jx --strip-components=1 -f ffmpeg-${FFMPEG_VERSION}.tar.bz2 && \
+  curl -sLO https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION: "5.1.8"}.tar.bz2 && \
+  tar -jx --strip-components=1 -f ffmpeg-${FFMPEG_VERSION: "5.1.8"}.tar.bz2 && \
   DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
   ./configure \
   --disable-debug \
