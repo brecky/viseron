@@ -30,6 +30,6 @@ stages:
     - task: DockerCompose@1
       inputs:
         action: 'Run a Docker Compose command'
-        dockerComposeFile: '**/azure-pipelines/docker-compose-build.yaml'
+        dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
         dockerComposeCommand: 'build amd64-ffmpeg'
         dockerComposePath: $(dockerComposePath)/docker-compose
