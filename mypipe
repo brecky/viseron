@@ -40,8 +40,8 @@ stages:
       #    dockerComposePath: $(dockerComposePath)
     - task: DockerCompose@1
       inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub Service'
+        #containerregistrytype: 'Container Registry'
+        #dockerRegistryEndpoint: 'Docker Hub Service'
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
         projectName: '$(Build.BuildId)'
         action: 'Run a Docker Compose command'
