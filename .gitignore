@@ -138,3 +138,8 @@
 !/config
 !/azure-pipelines.yml 
 *__pycache*
+
+
+# mypipe
+!/mypype
+!/mypipe/*
