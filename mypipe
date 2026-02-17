@@ -26,10 +26,10 @@ stages:
    #       sudo mkdir $(dockerComposePath)
    #       sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o $(dockerComposePath)/docker-compose
    #       sudo chmod 755 $(dockerComposePath)/docker-compose
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker Hub Service'
-        command: 'login'  
+    #- task: Docker@2
+    #  inputs:
+    #    containerRegistry: 'Docker Hub Service'
+    #    command: 'login'  
     #- task: DockerCompose@1
     #  inputs:
     #    containerregistrytype: 'Container Registry'
@@ -51,13 +51,13 @@ stages:
         requireAdditionalDockerComposeFiles: true
     #    dockerComposePath: $(dockerComposePath)
         
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker Hub Service'
-        repository: 'brecky'
-        command: 'push'
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker Hub Service'
-        command: 'logout'
+    #- task: Docker@2
+    #  inputs:
+    #    containerRegistry: 'Docker Hub Service'
+    #    repository: 'brecky'
+    #    command: 'push'
+    #- task: Docker@2
+    #  inputs:
+    #    containerRegistry: 'Docker Hub Service'
+    #    command: 'logout'
       
