@@ -51,7 +51,6 @@ stages:
         command: 'push'
         tags: |
           $(buildTag)
-          $(latestTag)
     
     - task: Docker@2
       displayName: Logout from Docker Hub
