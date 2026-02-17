@@ -19,25 +19,6 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-   # - task: Bash@3
-   #   inputs:
-   #     targetType: inline
-   #     script: |
-   #       sudo mkdir $(dockerComposePath)
-   #       sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o $(dockerComposePath)/docker-compose
-   #       sudo chmod 755 $(dockerComposePath)/docker-compose
-    #- task: Docker@2
-    #  inputs:
-    #    containerRegistry: 'Docker Hub Service'
-    #    command: 'login'  
-    #- task: DockerCompose@1
-    #  inputs:
-    #    containerregistrytype: 'Container Registry'
-    #    dockerRegistryEndpoint: 'Docker Hub Service'
-    #    action: 'Run a Docker Compose command'
-    #    dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-    #    dockerComposeCommand: 'build amd64-ffmpeg'
-      #    dockerComposePath: $(dockerComposePath)
     - task: DockerCompose@1
       inputs:
         #containerregistrytype: 'Container Registry'
@@ -49,19 +30,15 @@ stages:
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
-    #    dockerComposePath: $(dockerComposePath)
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker Hub Service'
         repository: 'brecky'
         command: 'push'
-    #- task: Docker@2
-    #  inputs:
-    #    containerRegistry: 'Docker Hub Service'
-    #    repository: 'brecky'
-    #    command: 'push'
-    #- task: Docker@2
-    #  inputs:
-    #    containerRegistry: 'Docker Hub Service'
-    #    command: 'logout'
+        tags: 'brecky'
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub Service'
+        command: 'logout'
       
