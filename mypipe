@@ -9,7 +9,7 @@ variables:
 - name: tag
   value: '$(Build.BuildId)'
 - name: dockerComposePath
-  value: /tmp/brecky
+  value: /tmp/mycontaiber
 stages:
 - stage: Build
   displayName: Build image
@@ -26,7 +26,7 @@ stages:
           sudo mkdir $(dockerComposePath)
           sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o $(dockerComposePath)/docker-compose
           sudo chmod 755 $(dockerComposePath)/docker-compose
-          #displayName: Download docker-compose
+          
     - task: DockerCompose@1
       inputs:
         action: 'Run a Docker Compose command'
