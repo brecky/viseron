@@ -10,6 +10,20 @@ variables:
   value: '$(Build.BuildId)'
 - name: dockerComposePath
   value: /tmp/mycontaiber
+  # Set your Docker Hub username securely in the pipeline variables UI
+- name: dockerUsername
+  value: 'brecky' 
+- name: imageName 
+  value: '$(dockerUsername)/my-application'
+- name: buildTag
+  value: '$(Build.BuildId)'
+- name: latestTag
+  value: 'latest'
+- name: imageRepository 
+  value: 'brecky/amd64-ffmpeg' 
+- name: dockerfilePath
+  value: '$(Build.SourcesDirectory)/Dockerfile'
+ 
 stages:
 - stage: Build
   displayName: Build image
@@ -21,20 +35,23 @@ stages:
     steps:
     - task: DockerCompose@1
       inputs:
-        #containerregistrytype: 'Container Registry'
-        #dockerRegistryEndpoint: 'Docker Hub Service'
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-        projectName: '$(Build.BuildId)'
+        projectName: '$(imageRepository)'#'$(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
+        
+        
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker Hub Service'
-        repository: 'brecky'
+        repository: 'brecky/$(Build.BuildId)'
         command: 'push'
+        tags: |
+          $(buildTag)
+          $(latestTag)
     
     - task: Docker@2
       inputs:
