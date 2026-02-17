@@ -13,7 +13,7 @@ variables:
   - name: tag
     value: "$(Build.BuildId)"
   - name: dockerComposePath
-    value: /tmp/brecky
+    value: /tmp/mycontainer
 stages:
   - stage: Build
     displayName: Build image
