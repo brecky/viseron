@@ -43,13 +43,6 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'Docker Hub Service'
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-        dockerComposeFileArgs: |
-          UBUNTU_VERSION="noble"
-          UBUNTU_VERSION_NUMBER="24.04"
-          NODE_VERSION="22.20.0"
-          BASE_VERSION="1.9.0"
-          OPENCV_VERSION="4.10.0"
-          OPENVINO_VERSION="2024.0.0"
         projectName: '$(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
