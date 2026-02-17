@@ -6,8 +6,8 @@ resources:
   repositories:
   - repository: self
 variables:
-- name: tag
-  value: '$(Build.BuildId)'
+#- name: tag
+#  value: '$(Build.BuildId)'
 - name: dockerComposePath
   value: /tmp/mycontaiber
 stages:
@@ -26,10 +26,23 @@ stages:
           sudo mkdir $(dockerComposePath)
           sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o $(dockerComposePath)/docker-compose
           sudo chmod 755 $(dockerComposePath)/docker-compose
-          
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub Service'
+        command: 'login'  
     - task: DockerCompose@1
       inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'Docker Hub Service'
         action: 'Run a Docker Compose command'
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
         dockerComposeCommand: 'build amd64-ffmpeg'
         dockerComposePath: $(dockerComposePath)/docker-compose
+    - task: DockerCompose@1
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'Docker Hub Service'
+        dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
+        action: 'Run a Docker Compose command'
+        dockerComposeCommand: 'build'
+        arguments: 'amd64-ffmpeg'
