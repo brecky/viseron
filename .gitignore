@@ -45,6 +45,7 @@
 !/docker/azure-agent-start.sh
 !/docker/opencv-python-headless-setup.py
 !/docker/jetson-nano/opencv-tuple.patch
+!/docker/docker-compose-build.yaml
 !/rootfs/
 !/rootfs/etc/
 !/rootfs/etc/**
