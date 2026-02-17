@@ -35,7 +35,6 @@ stages:
         containerRegistry: 'Docker Hub Service'
         repository: 'brecky'
         command: 'push'
-        tags: 'brecky'
     
     - task: Docker@2
       inputs:
