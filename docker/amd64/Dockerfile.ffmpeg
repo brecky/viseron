@@ -1,13 +1,13 @@
 
-FROM ubuntu:noble AS build
+FROM ubuntu:latest AS build
 
 WORKDIR /tmp/workdir
 
-ARG MAKEFLAGS="-j4"
+ARG MAKEFLAGS=-j4
 
 
 ENV \
-  OPENCOREAMR_VERSION="0.1.6" \
+  OPENCOREAMR_VERSION=0.1.6 \
   DEBIAN_FRONTEND=noninteractive \
   SRC=/usr/local \
   PATH=/usr/custom_cmake/bin:$PATH \
