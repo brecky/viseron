@@ -112,8 +112,8 @@ services:
         DLIB_VERSION: "$DLIB_VERSION"
         EXTRA_PIP_ARGS: --extra-index-url https://download.pytorch.org/whl/cpu
         OPENCV_VERSION: "$OPENCV_VERSION"
-      cache_from:
-        - brecky/amd64-wheels:$WHEELS_VERSION
+      #cache_from:
+        #- brecky/amd64-wheels:$WHEELS_VERSION
     image: brecky/amd64-wheels:$WHEELS_VERSION
 
   amd64-base:
