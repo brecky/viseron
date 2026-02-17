@@ -50,7 +50,11 @@ stages:
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
     #    dockerComposePath: $(dockerComposePath)
-        
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub Service'
+        repository: 'brecky'
+        command: 'push'
     #- task: Docker@2
     #  inputs:
     #    containerRegistry: 'Docker Hub Service'
