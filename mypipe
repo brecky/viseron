@@ -45,3 +45,9 @@ stages:
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub Service'
+        command: 'push'
+      
