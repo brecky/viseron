@@ -2,9 +2,9 @@ trigger:
   branches:
     include:
     - myproject
-resources:
-  repositories:
-  - repository: self
+#resources:
+#  repositories:
+#  - repository: self
 variables:
 - name: tag
   value: '$(Build.BuildId)'
@@ -23,6 +23,7 @@ variables:
   value: 'brecky/amd64-ffmpeg' 
 - name: dockerfilePath
   value: '$(Build.SourcesDirectory)/Dockerfile'
+  
  
 stages:
 - stage: Build
@@ -49,5 +50,6 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker Hub Service'
+        repository: 'brecky/amd64-ffmpeg' 
         command: 'push'
       
