@@ -1,6 +1,6 @@
-ARG UBUNTU_VERSION
 
-FROM ubuntu:${UBUNTU_VERSION} AS build
+
+FROM ubuntu:noble AS build
 
 WORKDIR /tmp/workdir
 
