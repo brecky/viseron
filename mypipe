@@ -36,11 +36,12 @@ stages:
     - task: DockerCompose@1
       displayName: Build in Compose
       inputs:
+        containerregistrytype: 'Azure Container Registry'
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
+        dockerComposeFileArgs: 'UBUNTU_VERSION="noble"'
         projectName: '$(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
-        dockerComposeFileArgs: '**/azure-pipelines/.env'      
