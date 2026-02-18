@@ -1,5 +1,6 @@
+ADD UBUNTU_VERSION
 
-FROM ubuntu:latest AS build
+FROM ubuntu:${UBUNTU_VERSION} AS build
 
 WORKDIR /tmp/workdir
 
