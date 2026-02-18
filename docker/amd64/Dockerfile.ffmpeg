@@ -1,6 +1,6 @@
 
 
-FROM ubuntu:noble AS build
+FROM ubuntu:24.04 AS build
 
 WORKDIR /tmp/workdir
 
