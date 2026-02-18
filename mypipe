@@ -43,4 +43,4 @@ stages:
         arguments: 'amd64-ffmpeg'
         nopIfNoDockerComposeFile: true
         requireAdditionalDockerComposeFiles: true
-      
+        dockerComposeFileArgs: '**/azure-pipelines/.env'      
