@@ -37,7 +37,7 @@ stages:
       displayName: Build in Compose
       inputs:
         dockerComposeFile: '**/docker/my-docker-compose-build.yaml'
-        projectName: '(Build.BuildId)'
+        projectName: '$(Build.BuildId)'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
         arguments: 'amd64-ffmpeg'
