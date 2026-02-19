@@ -35,5 +35,4 @@ RUN make -j 8
 #Install the libraries.
 RUN make install
 
-FROM scratch
 
