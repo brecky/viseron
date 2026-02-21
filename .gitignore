@@ -85,7 +85,8 @@
 !manager.py
 
 # Frontend
-!/frontend*
+!/frontend/
+!/frontend/frontend/node_modules/
 !/frontend/e2e
 !/frontend/e2e/**
 !/frontend/eslint-rules
